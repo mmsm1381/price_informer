@@ -1,5 +1,12 @@
+import logging
+
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, ReplyKeyboardMarkup, KeyboardButton
+
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
+logger = logging.getLogger(__name__)
 
 
 class TelegramMessageHandler:
@@ -24,6 +31,7 @@ class TelegramMessageHandler:
 
     @classmethod
     def market_menu(cls, update, context):
+        query = update.callback_query
         buttons = [
             [
                 KeyboardButton(text="📃 مشاهده همه بازار‌های موجود", callback_data=str(cls.MARKETS)),
@@ -33,9 +41,9 @@ class TelegramMessageHandler:
              ]
         ]
         keyboard = ReplyKeyboardMarkup(buttons)
-        update.message.reply_text(text="fkhdgjr")
-        update.callback_query.answer()
-        update.callback_query.edit_message(reply_markup=keyboard)
+        query.message.reply_text(text="fkhdgjr")
+        query.callback_query.answer()
+        query.callback_query.edit_message(reply_markup=keyboard)
         return cls.MARKETS
 
     @classmethod
@@ -51,7 +59,7 @@ class TelegramMessageHandler:
 class Bot:
 
     def __init__(self, bot_token):
-        self.bot = Updater(bot_token, use_context=True)
+        self.bot = Updater(bot_token, use_context=True, arbitrary_callback_data=True)
         self.dispatcher = self.bot.dispatcher
 
     def start_polling(self):
