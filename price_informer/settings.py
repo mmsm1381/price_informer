@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^-$_9mrav+7&innwou5l@itw)=v#1)6aka#ygc+b6yqzzbp+y_'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -122,7 +122,7 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
-BOT_TOKEN = "5285202877:AAHytsXfkZS4SX4qXzk9sPCwWLcy-fWmBCw"
+BOT_TOKEN = ""
 
 TABDEAL_API_KEY = ''
 TABDEAL_SECRET_KEY = ''
