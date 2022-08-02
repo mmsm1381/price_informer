@@ -1,4 +1,3 @@
-from celery import shared_task
 from celery import signals
 
 from price_collector.redis import TREDIS

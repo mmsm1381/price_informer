@@ -14,14 +14,12 @@ class Market(utils_base.BaseModel):
     first_currency_symbol = models.CharField(max_length=32)
     second_currency_symbol = models.CharField(max_length=32)
     exchange = models.SmallIntegerField(choices=Exchange.choices)
-    bids_price = models.DecimalField(decimal_places=16, max_length=32, null=True, max_digits=16)
-    asks_price = models.DecimalField(decimal_places=16, max_length=32, null=True, max_digits=16)
 
     class Meta:
         unique_together = ['first_currency_symbol', 'second_currency_symbol', 'exchange']
 
     def __str__(self):
-        return f"{self.first_currency_symbol}{self.second_currency_symbol}"
+        return f"{self.first_currency_symbol}_{self.second_currency_symbol}"
 
     @classmethod
     def get_all_markets_from_tabdeal(cls):
@@ -35,5 +33,5 @@ class Market(utils_base.BaseModel):
     def get_all_markets_from_db_and_create_message(cls):
         message = ''
         for market in cls.objects.all():
-            message += f"🟢 {market.first_currency_symbol}_{market.second_currency_symbol}\n"
+            message += f"🟢 {market}\n"
         return message

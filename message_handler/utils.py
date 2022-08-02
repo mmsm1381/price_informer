@@ -6,7 +6,7 @@ from price_collector.redis import TREDIS
 def create_price_message(markets):
     message = ''
     for market in markets:
-        message += f"🟢 {market.first_currency_symbol}_{market.second_currency_symbol} :\n"
+        message += f"🟢 {market} :\n"
         ask_price = TREDIS.redis_instance.get(f"{market}_ask")
         bid_price = TREDIS.redis_instance.get(f"{market}_bid")
 

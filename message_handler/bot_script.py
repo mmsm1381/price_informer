@@ -212,7 +212,8 @@ class Bot:
         start_handler = ConversationHandler(entry_points=[CommandHandler('start', TelegramMessageHandler.start)],
                                             states={
                                                 TelegramMessageHandler.MAIN_SELECTING_ACTION: main_handlers
-                                            }, fallbacks=[CommandHandler('stop', TelegramMessageHandler.stop)])
+                                            }, fallbacks=[CommandHandler('stop', TelegramMessageHandler.stop)],
+                                            allow_reentry=True)
 
         self.dispatcher.add_handler(start_handler)
         self.bot.start_polling()
