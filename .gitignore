@@ -4,3 +4,4 @@ db.sqlite3
 */magrations/**
 price_informer/local_settings.py
 .idea
+*/migrations/*
