@@ -1,18 +1,23 @@
+import os
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
+
 from tabdeal.spot import Spot
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env_file = Path(find_dotenv(usecwd=True))
+load_dotenv(verbose=True, dotenv_path=env_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -122,14 +127,13 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
-BOT_TOKEN = ""
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
 
-TABDEAL_API_KEY = ''
-TABDEAL_SECRET_KEY = ''
+TABDEAL_API_KEY = os.environ.get('TABDEAL_API_KEY')
+TABDEAL_SECRET_KEY = os.environ.get('TABDEAL_SECRET_KEY')
 TABDEAL_CLIENT = Spot(TABDEAL_API_KEY, TABDEAL_SECRET_KEY)
 
 
 TABDEAL_URLS = {
     'market_information': "https://api.tabdeal.org/plots/market_information/"
  }
-

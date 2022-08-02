@@ -4,18 +4,8 @@ from telegram import Bot
 
 from django.conf import settings
 
-from message_handler import bot_script
 from message_handler import models as message_handler_models
 
-
-# @signals.worker_ready.connect
-# def start_telegram_polling(**kwargs):
-#     bot_script.price_bot_informer.start_polling()
-#
-#
-# @shared_task
-# def inform_subscribers_task():
-#     pass
 
 @shared_task()
 def send_message_in_telegram(chat_id, message):

@@ -18,7 +18,7 @@ class Market(utils_base.BaseModel):
     asks_price = models.DecimalField(decimal_places=16, max_length=32, null=True, max_digits=16)
 
     class Meta:
-        unique_together = ['first_currency_symbol', 'second_currency_symbol']
+        unique_together = ['first_currency_symbol', 'second_currency_symbol', 'exchange']
 
     def __str__(self):
         return f"{self.first_currency_symbol}{self.second_currency_symbol}"
@@ -30,3 +30,10 @@ class Market(utils_base.BaseModel):
             first_symbol, second_symbol = market['symbol'].split('_')
             cls.objects.get_or_create(first_currency_symbol=first_symbol, second_currency_symbol=second_symbol,
                                       exchange=cls.Exchange.Tabdeal)
+
+    @classmethod
+    def get_all_markets_from_db_and_create_message(cls):
+        message = ''
+        for market in cls.objects.all():
+            message += f"🟢 {market.first_currency_symbol}_{market.second_currency_symbol}\n"
+        return message

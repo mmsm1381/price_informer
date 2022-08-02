@@ -3,3 +3,4 @@ django-celery-beat==2.3.0
 celery==5.2.7
 python-telegram-bot==13.13
 redis==4.3.4
+python-dotenv==0.20.0
